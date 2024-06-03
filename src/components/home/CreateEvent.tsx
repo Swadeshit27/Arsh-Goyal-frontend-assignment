@@ -47,6 +47,7 @@ export function CreateEvent() {
                             event_name: "",
                             description: "",
                             time: "",
+                            place: "remote",
                         }}
                         onSubmit={(value: eventsType) => saveEvent(value)}
                         validationSchema={validate}
@@ -81,19 +82,32 @@ export function CreateEvent() {
                                             <p className="text-red-500 text-xs">{errors.description}</p>
                                         }
                                     </div>
-                                    <div className="space-y-1.5 mb-4">
-                                        <label htmlFor="date" className="font-medium">Event Date</label>
-                                        <input
-                                            type="date"
-                                            placeholder="Event Name"
-                                            name="time"
-                                            onChange={handleChange}
-                                            className="w-full rounded-md"
-                                        />
-                                        {
-                                            (errors.time && touched.time) &&
-                                            <p className="text-red-500 text-xs">{errors.time}</p>
-                                        }
+                                    <div className="grid xs:grid-cols-2 gap-6">
+                                        <div className="space-y-1.5 mb-4">
+                                            <label htmlFor="date" className="font-medium">Event Date</label>
+                                            <input
+                                                type="date"
+                                                placeholder="Event Name"
+                                                name="time"
+                                                onChange={handleChange}
+                                                className="w-full rounded-md"
+                                            />
+                                            {
+                                                (errors.time && touched.time) &&
+                                                <p className="text-red-500 text-xs">{errors.time}</p>
+                                            }
+                                        </div>
+                                        <div className="space-y-1.5 mb-4">
+                                            <label htmlFor="date" className="font-medium">Event Type</label>
+                                            <select name="place" className="w-full rounded-md" onChange={handleChange}>
+                                                <option value="remote">Remote</option>
+                                                <option value="offline">Offline</option>
+                                            </select>
+                                            {
+                                                (errors.place && touched.place) &&
+                                                <p className="text-red-500 text-xs">{errors.place}</p>
+                                            }
+                                        </div> 
                                     </div>
                                     <button type="submit" className="customBtnStyle">Add Event</button>
                                 </Form>

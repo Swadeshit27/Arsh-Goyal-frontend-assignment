@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import ProviderWrapper from "@/redux/ProviderWrapper";
+import { Toaster } from "react-hot-toast"
 
 export const metadata: Metadata = {
   title: "ProElevate",
@@ -22,6 +23,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <Toaster />
         </ProviderWrapper>
       </body>
     </html>

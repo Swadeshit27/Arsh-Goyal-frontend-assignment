@@ -8,6 +8,7 @@ import { FaCheck } from "react-icons/fa";
 import ShowEvents from "./ShowEvents";
 import { FiFilter } from "react-icons/fi";
 import { Modal } from "flowbite-react";
+import { motion } from "framer-motion"
 
 const AllEvents = () => {
     const events = useAppSelector((state) => state);
@@ -21,6 +22,11 @@ const AllEvents = () => {
         showOffline: false,
         showRemote: false
     })
+    const [isEventOpen, setIsEventOpen] = useState(false);
+    const [isStatusOpen, setIsStatusOpen] = useState(false);
+    const [isPlaceOpen, setIsPlaceOpen] = useState(false);
+
+
     const resetDate = () => {
         setStatus({
             showCompleted: false,
@@ -48,35 +54,45 @@ const AllEvents = () => {
     }
 
     useEffect(() => {
-        StatusFilter(); 
+        StatusFilter();
     }, [status])
-    useEffect(() => { 
+    useEffect(() => {
         placeFilter();
     }, [place])
 
     return (
         <section className="layout my-6 sm:my-12 flex gap-x-8">
-            <div className="w-96 min-w-[24rem] max-lg:hidden h-auto space-y-6">
-                <div className="w-full min-h-32 border rounded-2xl overflow-hidden">
-                    <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center">
+            <motion.div className="w-96 min-w-[24rem] max-lg:hidden h-auto space-y-6">
+                <motion.div
+                    animate={{ height: isEventOpen ? 55 : 140 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full border rounded-2xl overflow-hidden">
+                    <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center" onClick={() => setIsEventOpen(!isEventOpen)}>
                         <h1 className="text-lg">Event</h1>
-                        <MdExpandLess className="rotate-180" size={24} />
+                        <MdExpandLess className={` ${!isEventOpen ? "rotate-0 " : "rotate-180"} transition-all ease-in-out duration-300`} size={24} />
                     </button>
-                    <div className="p-4">
-                        <input
-                            type="text"
-                            placeholder="Search event"
-                            className="w-full bg-gray-100 py-3 px-4 rounded-full border-none outline-none focus:!ring-orange-500"
-                            onChange={searchEvent}
-                        />
-                    </div>
-                </div>
-                <div className="w-full min-h-32 border rounded-2xl overflow-hidden">
-                    <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center">
+                    {
+                        !isEventOpen && <div className="p-4">
+                            <input
+                                type="text"
+                                placeholder="Search event"
+                                className="w-full bg-gray-100 py-3 px-4 rounded-full border-none outline-none focus:!ring-orange-500"
+                                onChange={searchEvent}
+                            />
+                        </div>
+                    }
+                </motion.div>
+                <motion.div
+                    animate={{ height: isStatusOpen ? 55 : 130 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full  border rounded-2xl overflow-hidden">
+                    <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center"
+                        onClick={() => setIsStatusOpen(!isStatusOpen)}
+                    >
                         <h1 className="text-lg">Status</h1>
-                        <MdExpandLess className="rotate-180" size={24} />
+                        <MdExpandLess className={` ${!isStatusOpen ? "rotate-0 " : "rotate-180"} transition-all ease-in-out duration-300`} size={24} />
                     </button>
-                    <div className="flex flex-wrap !p-4 gap-3 items-start self-stretch content-start">
+                    {!isStatusOpen && <div className="flex flex-wrap !p-4 gap-3 items-start self-stretch content-start">
                         <button
                             className={`filterBtn ${status.showUpcoming ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-900 hover:bg-gray-400 hover:text-white"}`}
                             onClick={() => setStatus({ ...status, showUpcoming: !status.showUpcoming })}
@@ -91,14 +107,19 @@ const AllEvents = () => {
                             Completed
                             {status.showCompleted && <FaCheck size={12} />}
                         </button>
-                    </div>
-                </div>
-                <div className="w-full min-h-32 border rounded-2xl overflow-hidden">
-                    <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center">
+                    </div>}
+                </motion.div>
+                <motion.div
+                    animate={{ height: isPlaceOpen ? 55 : 130 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full border rounded-2xl overflow-hidden">
+                    <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center"
+                        onClick={() => setIsPlaceOpen(!isPlaceOpen)}
+                    >
                         <h1 className="text-lg">Event Type</h1>
-                        <MdExpandLess className="rotate-180" size={24} />
+                        <MdExpandLess className={` ${!isPlaceOpen ? "rotate-0 " : "rotate-180"} transition-all ease-in-out duration-300`} size={24} />
                     </button>
-                    <div className="flex flex-wrap !p-4 gap-3 items-start self-stretch content-start">
+                    {!isPlaceOpen && <div className="flex flex-wrap !p-4 gap-3 items-start self-stretch content-start">
                         <button
                             className={`filterBtn ${place.showRemote ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-900 hover:bg-gray-400 hover:text-white"}`}
                             onClick={() => setPlace({ ...place, showRemote: !place.showRemote })}
@@ -110,36 +131,46 @@ const AllEvents = () => {
                             className={`filterBtn ${place.showOffline ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-900 hover:bg-gray-400 hover:text-white"}`}
                             onClick={() => setPlace({ ...place, showOffline: !place.showOffline })}
                         >
-                            Completed
+                            Offline
                             {place.showOffline && <FaCheck size={12} />}
                         </button>
-                    </div>
-                </div>
-            </div>
+                    </div>}
+                </motion.div>
+            </motion.div>
             <Modal show={openModal} size={"lg"} onClose={() => setOpenModal(false)} >
                 <Modal.Header>Filters</Modal.Header>
                 <Modal.Body>
-                    <div className="w-full h-auto space-y-6">
-                        <div className="w-full min-h-32 border rounded-2xl overflow-hidden">
-                            <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center">
+                    <motion.div className="w-full h-auto space-y-6">
+                        <motion.div
+                            animate={{ height: isEventOpen ? 55 : 140 }}
+                            transition={{ duration: 0.5 }}
+                            className="w-full border rounded-2xl overflow-hidden">
+                            <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center" onClick={() => setIsEventOpen(!isEventOpen)}>
                                 <h1 className="text-lg">Event</h1>
-                                <MdExpandLess className="rotate-180" size={24} />
+                                <MdExpandLess className={` ${!isEventOpen ? "rotate-0 " : "rotate-180"} transition-all ease-in-out duration-300`} size={24} />
                             </button>
-                            <div className="p-4">
-                                <input
-                                    type="text"
-                                    placeholder="Search event"
-                                    className="w-full bg-gray-100 py-3 px-4 rounded-full border-none outline-none focus:!ring-orange-500"
-                                    onChange={searchEvent}
-                                />
-                            </div>
-                        </div>
-                        <div className="w-full min-h-32 border rounded-2xl overflow-hidden">
-                            <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center">
+                            {
+                                !isEventOpen && <div className="p-4">
+                                    <input
+                                        type="text"
+                                        placeholder="Search event"
+                                        className="w-full bg-gray-100 py-3 px-4 rounded-full border-none outline-none focus:!ring-orange-500"
+                                        onChange={searchEvent}
+                                    />
+                                </div>
+                            }
+                        </motion.div>
+                        <motion.div
+                            animate={{ height: isStatusOpen ? 55 : 130 }}
+                            transition={{ duration: 0.5 }}
+                            className="w-full  border rounded-2xl overflow-hidden">
+                            <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center"
+                                onClick={() => setIsStatusOpen(!isStatusOpen)}
+                            >
                                 <h1 className="text-lg">Status</h1>
-                                <MdExpandLess className="rotate-180" size={24} />
+                                <MdExpandLess className={` ${!isStatusOpen ? "rotate-0 " : "rotate-180"} transition-all ease-in-out duration-300`} size={24} />
                             </button>
-                            <div className="flex flex-wrap !p-4 gap-3 items-start self-stretch content-start">
+                            {!isStatusOpen && <div className="flex flex-wrap !p-4 gap-3 items-start self-stretch content-start">
                                 <button
                                     className={`filterBtn ${status.showUpcoming ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-900 hover:bg-gray-400 hover:text-white"}`}
                                     onClick={() => setStatus({ ...status, showUpcoming: !status.showUpcoming })}
@@ -154,14 +185,19 @@ const AllEvents = () => {
                                     Completed
                                     {status.showCompleted && <FaCheck size={12} />}
                                 </button>
-                            </div>
-                        </div>
-                        <div className="w-full min-h-32 border rounded-2xl overflow-hidden">
-                            <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center">
+                            </div>}
+                        </motion.div>
+                        <motion.div
+                            animate={{ height: isPlaceOpen ? 55 : 130 }}
+                            transition={{ duration: 0.5 }}
+                            className="w-full border rounded-2xl overflow-hidden">
+                            <button className="w-full h-14 px-4 bg-gray-200 flex justify-between items-center"
+                                onClick={() => setIsPlaceOpen(!isPlaceOpen)}
+                            >
                                 <h1 className="text-lg">Event Type</h1>
-                                <MdExpandLess className="rotate-180" size={24} />
+                                <MdExpandLess className={` ${!isPlaceOpen ? "rotate-0 " : "rotate-180"} transition-all ease-in-out duration-300`} size={24} />
                             </button>
-                            <div className="flex flex-wrap !p-4 gap-3 items-start self-stretch content-start">
+                            {!isPlaceOpen && <div className="flex flex-wrap !p-4 gap-3 items-start self-stretch content-start">
                                 <button
                                     className={`filterBtn ${place.showRemote ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-900 hover:bg-gray-400 hover:text-white"}`}
                                     onClick={() => setPlace({ ...place, showRemote: !place.showRemote })}
@@ -173,12 +209,12 @@ const AllEvents = () => {
                                     className={`filterBtn ${place.showOffline ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-900 hover:bg-gray-400 hover:text-white"}`}
                                     onClick={() => setPlace({ ...place, showOffline: !place.showOffline })}
                                 >
-                                    Completed
+                                    Offline
                                     {place.showOffline && <FaCheck size={12} />}
                                 </button>
-                            </div>
-                        </div>
-                    </div>
+                            </div>}
+                        </motion.div>
+                    </motion.div>
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="flex justify-end items-center w-full gap-x-4">
@@ -199,7 +235,7 @@ const AllEvents = () => {
                         <span>Filters</span>
                         <FiFilter />
                     </button>
-                </div> 
+                </div>
                 <ShowEvents events={filterEvents} />
             </div>
         </section>

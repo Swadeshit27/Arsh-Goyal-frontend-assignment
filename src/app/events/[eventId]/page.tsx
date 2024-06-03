@@ -69,7 +69,7 @@ const ParticularEvent = () => {
                                 <h3 className='text-lg font-semibold mb-3'>Description</h3>
                                 <p className='max-xs:text-sm text-gray-600'>{eventDetails?.description}</p>
                             </div>
-                            <div className='w-full lg:w-[32%] h-68 bg-gray-50 border border-gray-100 rounded-xl  p-4 xs:p-6  order-1 lg:order-2 '>
+                            <div className='w-full lg:w-[32%] h-72 bg-gray-50 border border-gray-100 rounded-xl  p-4 xs:p-6  order-1 lg:order-2 '>
                                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                                     <Image src={Event} alt={"event image"} className="w-6 h-6 rounded-  object-contain" />
                                 </div>
@@ -80,7 +80,7 @@ const ParticularEvent = () => {
                                 </div>
                                 <div className='flex items-center space-x-2 my-4 text-base text-gray-800 font-medium'>
                                     <span><GrLocation size={20} /></span>
-                                    <p>{"Remote"}</p>
+                                    <p>{eventDetails.place}</p>
                                 </div>
                                 <button className='customBtnStyle'>Register</button>
                             </div>

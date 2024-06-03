@@ -27,11 +27,10 @@ const ShowEvents = ({ events }: { events: eventsType[] }) => {
                                             <h1 className="text-base sm:text-xl  font-semibold mt-1 mb-1.5">{item.event_name}</h1>
                                             <div className="flex items-center space-x-2 text-gray-600 max-sm:text-sm">
                                                 <GrLocation size={18} />
-                                                <p>Remote</p>
+                                                <p>{item.place}</p>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </Link>
                         ))}

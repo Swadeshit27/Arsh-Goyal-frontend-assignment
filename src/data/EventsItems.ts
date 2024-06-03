@@ -4,18 +4,21 @@ export const EventList: eventsType[] = [
         event_name: "Spring Festival",
         description: "Celebrate the arrival of spring with food, music, and fun activities for all ages. The Spring Festival is an annual event that brings together the community to enjoy the beauty of the season. The festival features a variety of food stalls offering delicious seasonal treats, from fresh fruit smoothies to grilled vegetables and savory snacks. Local musicians and bands will perform throughout the day, providing a lively soundtrack to the festivities. There will also be a range of activities for children, including face painting, crafts, and games. Adults can participate in gardening workshops, yoga sessions, and cooking demonstrations. The event is held in the town square, which will be decorated with vibrant spring flowers and banners. The Spring Festival is a great opportunity to meet new people, support local businesses, and celebrate the season with family and friends. Don’t forget to bring a picnic blanket to relax on the grass while enjoying the performances. The event is free to attend, and all are welcome. Whether you are a long-time resident or a visitor, the Spring Festival promises to be a memorable day full of joy and community spirit. Join us for this delightful celebration and make the most of the spring season.",
         time: "2024-04-28",
+        place: 'Offline'
     },
     {
         event_id: 2,
         event_name: "Tech Innovators Conference",
         description: "Join industry leaders and innovators for a day of insightful talks and networking opportunities at the Tech Innovators Conference. This annual event is designed to bring together the brightest minds in technology to discuss the latest trends, challenges, and opportunities in the industry. The conference features keynote presentations from renowned tech experts, panel discussions on emerging technologies, and hands-on workshops where attendees can learn about new tools and techniques. Topics covered will include artificial intelligence, blockchain, cybersecurity, cloud computing, and more. Attendees will have the chance to network with peers, share ideas, and collaborate on projects. The event also includes an exhibition area where companies can showcase their latest products and services. Whether you are a seasoned professional or new to the tech world, the Tech Innovators Conference offers valuable insights and connections to help you stay ahead in the fast-paced technology landscape. The conference will take place at the downtown convention center, which offers state-of-the-art facilities and ample space for attendees. Breakfast, lunch, and refreshments will be provided, and there will be a networking reception at the end of the day. Don’t miss this opportunity to learn from the best and connect with fellow tech enthusiasts. Register now to secure your spot at the Tech Innovators Conference and be part of the future of technology.",
-        time: "2024-07-10"
+        time: "2024-07-10",
+        place: 'remote'
     },
     {
         event_id: 3,
         event_name: "Art and Craft Fair",
         description: "Explore handmade arts and crafts from local artists and vendors at the Art and Craft Fair. This event celebrates creativity and craftsmanship, offering a wide range of unique, handmade items. From pottery and paintings to jewelry and textiles, there is something for everyone. The fair provides a platform for artists to showcase their work and for visitors to purchase one-of-a-kind pieces directly from the makers. In addition to the vendor booths, there will be live demonstrations where you can watch artists at work and learn about their techniques. There will also be interactive workshops where attendees can try their hand at various crafts, such as pottery wheel throwing, watercolor painting, and beadwork. The fair is a great place to find unique gifts, home decor, and personal treasures while supporting local artisans. The event is held in a picturesque park, with plenty of shade and seating areas for relaxation. Food trucks will be on-site offering a variety of delicious snacks and meals, and there will be live music performances throughout the day to create a festive atmosphere. Whether you are an art enthusiast or simply looking for a fun day out, the Art and Craft Fair promises an enjoyable experience for all ages. Come and discover the talent and creativity that our community has to offer.",
-        time: "2024-01-5"
+        time: "2024-01-5",
+        place: 'remote'
     },
     // {
     //     event_id: 4,
